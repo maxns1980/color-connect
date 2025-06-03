@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Color Connect Game</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Press+Start+2P&family=Merriweather&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Share Tech Mono', monospace; /* Default font */
+      overscroll-behavior: none; /* Prevent pull-to-refresh on mobile */
+    }
+    /* For better visual separation of cells if needed, but Tailwind borders should suffice */
+    .ball-cell {
+      touch-action: none; /* Prevent scrolling on touch devices when dragging on balls */
+    }
+
+    @keyframes borderColorPulse {
+      0%, 100% { border-color: white; }
+      25% { border-color: #AAAAAA; } /* Light grey */
+      50% { border-color: #555555; } /* Dark grey */
+      75% { border-color: #222222; } /* Near black */
+    }
+
+    .animate-borderColorPulse {
+      animation: borderColorPulse 2s infinite linear;
+    }
+  </style>
+<script type="importmap">
+{
+  "imports": {
+    "react-dom/": "https://esm.sh/react-dom@^19.1.0/",
+    "react/": "https://esm.sh/react@^19.1.0/",
+    "react": "https://esm.sh/react@^19.1.0/",
+    "@netlify/functions": "https://esm.sh/@netlify/functions@^4.1.2",
+    "@netlify/blobs": "https://esm.sh/@netlify/blobs@^9.1.5"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body class="flex items-center justify-center min-h-screen bg-slate-900">
+  <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>

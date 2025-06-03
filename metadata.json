@@ -1,0 +1,6 @@
+{
+  "name": "Copy of Color Connect Game TEST SERWER",
+  "description": "A game where players connect balls of the same color on a grid. Connect at least 2 balls horizontally or vertically to score points. New balls fall from above to fill the gaps.",
+  "requestFramePermissions": [],
+  "prompt": ""
+}
