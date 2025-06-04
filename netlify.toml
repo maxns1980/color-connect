@@ -1,0 +1,33 @@
+# netlify.toml
+
+# Konfiguracja budowania dla Twojego projektu Vite
+[build]
+  command = "vite build"    # Polecenie do zbudowania Twojej aplikacji
+  publish = "dist"          # Katalog, który Netlify ma opublikować (standard dla Vite)
+  functions = "netlify/functions" # Katalog, gdzie znajdują się Twoje funkcje serwerless
+
+# Konfiguracja dla funkcji serwerless
+[functions]
+  node_bundler = "esbuild" # Używamy esbuild do paczkowania funkcji (dobre dla TypeScript)
+
+# Ustawienia dla wszystkich funkcji (np. high-scores.ts)
+[functions."*"]
+  # Mówi Netlify Dev (lokalnemu serwerowi), aby nie próbował dołączać @netlify/blobs,
+  # ponieważ jest to moduł dostarczany przez środowisko Netlify.
+  external_node_modules = ["@netlify/blobs"]
+
+# Przekierowania (Redirects and Rewrites)
+[[redirects]]
+  # Przekierowuje wszystkie żądania /api/* do Twoich funkcji Netlify
+  # np. /api/high-scores -> /.netlify/functions/high-scores
+  from = "/api/*"
+  to = "/.netlify/functions/:splat" # :splat zachowuje resztę ścieżki
+  status = 200 # Traktuj to jako "rewrite" (przepisanie URL) a nie przekierowanie 301/302
+
+[[redirects]]
+  # Reguła fallback dla aplikacji SPA (Single Page Application)
+  # Wszystkie inne żądania, które nie pasują do plików statycznych lub innych reguł,
+  # powinny serwować index.html, aby React Router (lub podobny) mógł obsłużyć routing po stronie klienta.
+  from = "/*"
+  to = "/index.html"
+  status = 200
